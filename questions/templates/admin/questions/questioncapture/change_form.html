@@ -1,0 +1,17 @@
+{% extends "admin/change_form.html" %}
+{% block extrahead %}
+    {{ block.super }}
+        <!--[if IE]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+{% endblock %}
+{% block after_field_sets %}
+<fieldset class="module aligned capture"><legend>Capture d'&eacutecran</legend>
+    <div id="conteneur">
+        <img id="capture_image" src="{{ original.image.url }}">
+        {% for zone in original.zoneimage_set.all %}
+        <div class="final" style="top:{{ zone.y }}px;left:{{ zone.x }}px;height:{{ zone.height }}px;width:{{ zone.width }}px;"></div>
+        {% endfor %}
+    </div>
+</fieldset>
+{% endblock %}

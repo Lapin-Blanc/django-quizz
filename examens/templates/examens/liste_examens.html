@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Liste des tests dispobibles</title>
+    </head>
+    <body>
+        <ul>
+            {% for exam in exams_list %}
+            <li><a href="/test/{{ exam.id }}/">{{ exam }}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

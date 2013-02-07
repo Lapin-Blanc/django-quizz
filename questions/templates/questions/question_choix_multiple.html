@@ -1,0 +1,10 @@
+    <form action="{{ answer_url }}" method="post" id="question_form_id">
+        <fieldset style="padding:10px"><legend>Question {{ q_position }}</legend>
+            <input type="button" value="Annuler" id="btn_annuler" />
+            <input type="submit" value="Valider" />
+            <p>{{ question.question|safe }}</p>
+            {% for choix in question.choix_set.all %}
+            <input type="radio" name="answer" value="{{choix.id}}">{{choix.choix}}</input><br />
+            {% endfor %}
+        </fieldset>
+    </form>

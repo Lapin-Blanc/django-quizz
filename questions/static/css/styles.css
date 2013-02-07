@@ -1,0 +1,36 @@
+#conteneur {
+    position: relative;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    z-index: 1;
+    margin: 0px 40px 40px 0px;
+}
+
+#capture_image {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    z-index: 0;
+}
+.selection-box {
+    position:    absolute;
+    background: transparent;
+    border:     1px dotted #000;
+    z-index: 3;
+}
+.final {
+    position: absolute;
+    background: rgba(0,100,0,0.3);
+    border: 1px solid rgba(0,0,0,0.6);
+    z-index: 2;
+
+    -moz-box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+
+}
+
+fieldset.capture {
+    padding : 10px;
+}

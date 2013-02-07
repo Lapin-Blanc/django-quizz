@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Examen {{ exam|capfirst }}</title>
+        <script type="text/javascript" src="/static/js/jquery-1.9.0.js"></script>
+        <script type="text/javascript" src="/static/js/jquery-ui-1.10.0.custom.min.js"></script>
+        <link rel="stylesheet" href="/static/css/ui-lightness/jquery-ui-1.10.0.custom.min.css" />
+        <script type="text/javascript">
+        function SecToMinSec( seconds ){
+            var min = Math.floor(seconds/60);
+            var sec = seconds - 60*min;
+            if (min < 10) min = "0"+min;
+            if (sec < 10) sec = "0"+sec;
+            return min+":"+sec;
+        };
+        $(document).ready(function() {
+            $("#question_form_id").append("{%csrf_token %}");
+            $("#min_elapsed_id").html(SecToMinSec({{ elapsed }}));
+            $("#min_total_id").html(SecToMinSec({{total}}));
+            $("#progressbar").progressbar({ max: {{ total }} , value: {{ elapsed }} });
+            var tick_interval = 1;
+            var tick_increment = 1;
+            var tick_function = function() {
+                var value = $("#progressbar").progressbar("option", "value");
+                value += tick_increment;
+                $("#min_elapsed_id").html(SecToMinSec(value));
+                $("#progressbar").progressbar("option", "value", value);
+                if (value < {{ total }}) {
+                    window.setTimeout(tick_function, tick_interval * 1000);
+                } else {
+                    alert("Fin du temps imparti !");
+                }
+            };
+            window.setTimeout(tick_function, tick_interval * 1000);
+        });
+        </script>
+    </head>
+    <body>
+        <div class="ui-widget-default" style="width:400px;clear:both;">
+            <em><span>Temps &eacute;coul&eacute;&nbsp;&nbsp;&nbsp;<strong></span></em><span id="min_elapsed_id"></span>/<span id="min_total_id">{{ total }}</span></strong>
+            <div id="progressbar" style="height: 20px;"></div>
+        </div>
+        <br />
+        <br />
+        <div>
+        {{ question_html }}
+        </div>
+    </body>
+</html>
