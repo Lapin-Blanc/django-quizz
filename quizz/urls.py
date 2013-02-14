@@ -1,3 +1,4 @@
+from django.views.generic.simple import redirect_to
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from questions.models import QuestionCapture
@@ -15,6 +16,9 @@ urlpatterns = patterns('',
     url(r'^test/(?P<exam_id>\d+)/$', 'examens.views.exam_for_user'),
     url(r'^test/(?P<exam_id>\d+)/(?P<question_id>\d+)/answer/$', 'examens.views.answer_exam_question'),
     url(r'^test/$', 'examens.views.exams_for_user'),
+    
+    # catch them all
+    url(r'^$', redirect_to, {'url': '/test/'}),
     
 )
 urlpatterns += patterns('',
